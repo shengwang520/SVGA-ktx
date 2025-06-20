@@ -10,9 +10,13 @@
 
 ## Step 2. Add the dependency
 
-* api 'com.github.shengwang520:SVGA-ktx:1.0.01'
+* api 'com.github.shengwang520:SVGA-ktx:1.0.02'
 
 ## Changelog
+
+### Version 1.0.02
+
+* 优化mContext初始化
 
 ### Version 1.0.01
 

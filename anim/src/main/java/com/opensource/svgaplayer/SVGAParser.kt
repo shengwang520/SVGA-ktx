@@ -7,15 +7,7 @@ import android.os.Looper
 import com.opensource.svgaplayer.proto.MovieEntity
 import com.opensource.svgaplayer.utils.log.LogUtils
 import org.json.JSONObject
-import java.io.BufferedInputStream
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
-import java.io.IOException
-import java.io.InputStream
-import java.lang.ref.WeakReference
+import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.concurrent.Executors
@@ -122,7 +114,7 @@ class SVGAParser(context: Context?) {
         private const val TAG = "SVGAParser"
 
         private val threadNum = AtomicInteger(0)
-        private var mShareParser = WeakReference<SVGAParser>(SVGAParser(null))
+        private var mShareParser = SVGAParser(null)
 
         internal var threadPoolExecutor = Executors.newFixedThreadPool(SVGACache.nThreads) { r ->
             Thread(r, "SVGAParser-Thread-${threadNum.getAndIncrement()}")
@@ -133,13 +125,7 @@ class SVGAParser(context: Context?) {
         }
 
         fun shareParser(): SVGAParser {
-            mShareParser.get()?.let {
-                return it
-            } ?: run {
-                return SVGAParser(null).apply {
-                    mShareParser = WeakReference(this)
-                }
-            }
+            return mShareParser
         }
     }
 
