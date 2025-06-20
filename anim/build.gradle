@@ -1,0 +1,53 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.release
+                groupId = 'com.github.shengwang520'
+                artifactId = 'SVGA-ktx'
+                version = "1.0.01"
+            }
+        }
+    }
+}
+
+android {
+    namespace 'com.opensource.svgaplayer'
+    compileSdk 35
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 35
+    }
+
+    compileOptions {
+        kotlinOptions.freeCompilerArgs += ['-module-name', "com.opensource.svgaplayer"]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+}
+
+
+dependencies {
+    implementation 'com.squareup.wire:wire-runtime:4.4.1'
+}
