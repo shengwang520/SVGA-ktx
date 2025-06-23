@@ -10,9 +10,13 @@
 
 ## Step 2. Add the dependency
 
-* api 'com.github.shengwang520:SVGA-ktx:1.0.02'
+* api 'com.github.shengwang520:SVGA-ktx:1.0.03'
 
 ## Changelog
+
+### Version 1.0.03
+
+* 新增assets路径开放和更新
 
 ### Version 1.0.02
 

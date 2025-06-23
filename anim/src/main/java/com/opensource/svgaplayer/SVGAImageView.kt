@@ -45,6 +45,8 @@ open class SVGAImageView @JvmOverloads constructor(
     var fillMode: FillMode = FillMode.Forward
     var callback: SVGACallback? = null
 
+    var assetsName: String? = null
+
     private var mAnimator: ValueAnimator? = null
     private var mItemClickAreaListener: SVGAClickAreaListener? = null
     private var mAntiAlias = true
@@ -81,12 +83,21 @@ open class SVGAImageView @JvmOverloads constructor(
             }
         }
         typedArray.getString(R.styleable.SVGAImageView_source)?.let {
+            this.assetsName = it
             parserSource(it)
         }
         typedArray.recycle()
     }
 
-    private fun parserSource(source: String) {
+    /**
+     * update assets name
+     */
+    open fun updateSource(assetsPath: String) {
+        this.assetsName = assetsPath
+        parserSource(assetsPath)
+    }
+
+    open fun parserSource(source: String) {
         val refImgView = WeakReference<SVGAImageView>(this)
         val parser = SVGAParser(context)
         if (source.startsWith("http://") || source.startsWith("https://")) {
